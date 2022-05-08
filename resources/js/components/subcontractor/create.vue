@@ -1,0 +1,200 @@
+<template>
+    <div>
+        <div class="row">
+            <router-link to="/subcontractor" class="btn btn-primary">All Sub-contractors</router-link>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-xl-12 col-lg-12 col-md-12">
+                <div class="card shadow-sm my-5">
+                    <div class="card-body p-0">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="login-form">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Add Sub-contractor</h1>
+                                    </div>
+                                    <form class="user" @submit.prevent="subcontractorInsert"
+                                        enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <div class="form-row">
+
+                                                <div class="col-md-6">
+                                                    <label for="exampleFormControlSelect1">Enter Subcontractor Name:</label>
+                                                    <input type="text" class="form-control"
+                                                        v-model="form.name">
+                                                    <small class="text-danger" v-if="errors.name"> {{errors.name[0]}}
+                                                    </small>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label for="exampleFormControlSelect1">Part</label>
+                                                    <select class="form-control custom-select" id="exampleFormControlSelect1"
+                                                        v-model="form.part_id"
+                                                        @change="getSubstructure">
+                                                        <option v-for="part in parts" :value="part.id">
+                                                            {{part.name}}</option>
+                                                    </select>
+                                                    <small class="text-danger" v-if="errors.part_id">
+                                                        {{errors.part_id[0]}}
+                                                    </small>
+                                                    
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-row">
+
+                                                <div class="col-md-6">
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter abbreviation Name"
+                                                        v-model="form.abbreviation">
+                                                    <small class="text-danger" v-if="errors.abbreviation">
+                                                        {{errors.abbreviation[0]}}
+                                                    </small>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Foreman Name" v-model="form.foreman">
+                                                    <small class="text-danger" v-if="errors.foreman">
+                                                        {{errors.foreman[0]}}
+                                                    </small>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <div class="form-row">
+
+                                                <div class="col-md-6">
+                                                    <input type="text" class="form-control" placeholder="Enter Phone"
+                                                        v-model="form.phone">
+                                                    <small class="text-danger" v-if="errors.phone"> {{errors.phone[0]}}
+                                                    </small>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <input type="email" class="form-control" placeholder="Enter email"
+                                                        v-model="form.email">
+                                                    <small class="text-danger" v-if="errors.email">
+                                                        {{errors.email[0]}} </small>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="form-row">
+
+                                                <div class="col-md-6">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="customFile"
+                                                            @change="onFileSelected">
+                                                        <small class="text-danger" v-if="errors.photo">
+                                                            {{errors.photo[0]}} </small>
+                                                        <label class="custom-file-label" for="customFile">Choose
+                                                            image</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+
+                                                    <img :src="form.photo" style="height: 40px;width: 40px;">
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <button class="btn btn-primary btn-block" type="submit">Submit</button>
+                                        </div>
+
+                                    </form>
+                                    <hr>
+                                    <div class="text-center">
+
+                                    </div>
+                                    <div class="text-center">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+    created() {
+        if (!User.loggedIn()) {
+            this.$router.push({
+                name: '/'
+            })
+        }
+
+        axios.get('/api/part').then(({
+            data
+        }) => {
+            this.parts = data
+        })
+    },
+    data() {
+        return {
+            form: {
+                name: null,
+                abbreviation: null,
+                part_id: null,
+                foreman: null,
+                phone: null,
+                email: null,
+                photo: null,
+            },
+            errors: {},
+            parts: {},
+        }
+    },
+    methods: {
+        subcontractorInsert() {
+            axios.post('/api/subcontractor', this.form)
+                .then(() => {
+                    this.$router.push({
+                        name: "subcontractor"
+                    })
+                    Notification.success()
+                })
+                .catch(error => this.errors = error.response.data.errors)
+        },
+        onFileSelected(e) {
+            let file = e.target.files[0];
+            if (file.size > 6 * 1048770) {
+                Notification.image_validation()
+            } else {
+                let reader = new FileReader();
+                reader.onload = e => {
+                    this.form.photo = e.target.result
+
+                };
+                reader.readAsDataURL(file);
+
+            }
+
+        }
+    }
+}
+</script>
+
+<style>
+
+
+
+
+
+
+</style>
