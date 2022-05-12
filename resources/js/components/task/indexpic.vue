@@ -9,14 +9,14 @@
                     <div class="form-row">
 
                         <div class="col-md-6">
-                            <label for="exampleFormControlSelect1">Search</label>
+                            <label for="exampleFormControlSelect1">Search by structure name</label>
 
                             <input type="text" placeholder="Search ..." class="form-control" style="width: 300px;" v-model="searchTerm">
                             
                         </div>
 
                         <div class="col-md-6">
-                            <label for="exampleFormControlSelect1">Project</label>
+                            <!-- <label for="exampleFormControlSelect1">Project</label>
                             <select class="form-control custom-select" id="exampleFormControlSelect1"
                                 v-model="project_id" >
                                 <option v-for="project in projects" :value="project.id">
@@ -25,7 +25,7 @@
                             </select>
                             <small class="text-danger" v-if="errors.structure_id">
                                 {{errors.structure_id[0]}}
-                            </small>
+                            </small> -->
                         </div>
 
                     </div>
@@ -33,7 +33,7 @@
         <br>
         <div class="row">
                 
-                <div class="card m-2" v-for="task in filterSearch" :key="task.id" style="width: 18rem; display: flex;">
+                <div class="card m-2" v-for="task in pageOfItems" :key="task.id" style="width: 18rem; display: flex;">
 				  <img v-if="task.cover_pic != null" class="card-img-top" :src="task.cover_pic" alt="No image">
 				  <div class="card-body">
 				    <h5 class="card-title">{{task.subcontractor.abbreviation}}  {{task.structure.name}}</h5>
@@ -64,8 +64,8 @@
                     <button type="button" name="edit" class="btn btn-primary btn-sm text-white" @click="fetchData(task.id)">Upload pic</button>
 				  </div>
 				</div>
-                
-
+                <!-- vue pagination https://youtu.be/cuirNvBx8U8 -->
+                <jw-pagination :pageSize=8 :items="filterSearch" @changePage="onChangePage" class="m-5"></jw-pagination>
         </div>
         <!-- Start Modal -->
         <div v-if="myModel">
@@ -153,6 +153,7 @@ export default {
         form: {
             photo: null,
         },
+        pageOfItems: [],
 
 
         errors: {},
@@ -162,12 +163,20 @@ export default {
     computed: {
         filterSearch() {
             return this.tasks.filter(task => {
-                return task.structure.name.match(this.searchTerm) && task.project_id === this.project_id
+                // return task.structure.name.match(this.searchTerm) && task.project_id === this.project_id
+                return task.structure.name.toUpperCase().match(this.searchTerm.toUpperCase())
+
             })
         }
     },
 
     methods: {
+        // for pagination
+        onChangePage(pageOfItems) {
+            console.log(pageOfItems)
+            // update page of items
+            this.pageOfItems = pageOfItems;
+        },
         AllTask() {
           //security token
             let token = localStorage.getItem('token')

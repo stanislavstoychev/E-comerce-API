@@ -22,6 +22,9 @@ window.Swal = Swal;
 import Notification from './helpers/Notification'
 window.Notification = Notification;
 
+import JwPagination from 'jw-vue-pagination';
+Vue.component('jw-pagination', JwPagination);
+
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',

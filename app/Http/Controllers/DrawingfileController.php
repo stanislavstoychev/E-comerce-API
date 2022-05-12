@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\drawingfile;
+use App\Drawingfile;
 use Illuminate\Http\Request;
 
 class DrawingfileController extends Controller
@@ -80,9 +80,9 @@ class DrawingfileController extends Controller
      */
     public function destroy($id)
     {
-        $drawingfile = Drawingfile::find($id);
+        $drawingfile = Drawingfile::findOrFail($id);
         $file = $drawingfile->file;
-        if($file) {
+        if(file_exists($file)) {
             unlink($file);
         }
 

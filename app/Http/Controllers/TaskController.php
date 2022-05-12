@@ -319,7 +319,9 @@ class TaskController extends Controller
         
         $pics = $task->pics;
         foreach($pics as $pic) {
+            if(file_exists($pic->file)) {
             unlink($pic->file);
+        }
             $pic->delete();
         }
         $task->delete();

@@ -90,6 +90,7 @@ Route::get('userallrfi', 'InspectionresultController@userallrfi');
 //Task
 Route::get('task/{id}/pic', 'TaskPicController@show');
 Route::post('task/cover/{id}', 'TaskController@uploadcover');
+Route::post('uploadfp/{id}', 'TaskPicController@storefp');
 Route::post('task', 'TaskController@store');
 Route::get('task', 'TaskController@index');
 Route::get('tasknotdone', 'TaskController@indexNotDone');
@@ -97,6 +98,7 @@ Route::get('task/{id}', 'TaskController@show');
 Route::post('task/{id}', 'TaskController@update');
 Route::delete('task/{id}', 'TaskController@destroy');
 Route::delete('taskpicture/{id}', 'TaskPicController@destroy');
+
 
 Route::get('structure/{project}', 'StructureController@index');
 Route::get('structure', 'StructureController@all');

@@ -46,10 +46,7 @@
                                     <td>{{task.actual_finish}}</td>
                                     <td>{{task.user.name}}</td>
                                     <td>
-                                        <router-link :to="{name: 'uploadfp-task', params:{id: task.id}}"
-                                            class="btn btn-sm btn-primary">
-                                            <i class="fas fa-paperclip"></i>
-                                        </router-link>
+                                        
                                         <router-link :to="{name: 'edit-task', params:{id: task.id}}"
                                             class="btn btn-sm btn-success">
                                             <i class="far fa-edit"></i>

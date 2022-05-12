@@ -35,12 +35,21 @@ class Notification {
     }
     error() {
         new Noty({
-            type: 'alert',
+            type: 'warning',
             layout: 'topRight',
             text: 'Something went wrong!',
-            timeout: 1000,
+            timeout: 3000,
         }).show();
     }
+
+    incomplete() {
+            new Noty({
+                type: 'warning',
+                layout: 'topRight',
+                text: 'Please fill the missing information!',
+                timeout: 3000,
+            }).show();
+        }
 
     warning() {
         new Noty({
