@@ -16,6 +16,7 @@
                         </div>
 
                         <div class="col-md-6">
+                            <!-- //not working on web server -->
                             <!-- <label for="exampleFormControlSelect1">Project</label>
                             <select class="form-control custom-select" id="exampleFormControlSelect1"
                                 v-model="project_id" >
