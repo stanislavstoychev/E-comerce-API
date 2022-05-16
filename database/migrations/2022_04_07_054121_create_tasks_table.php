@@ -31,6 +31,7 @@ class CreateTasksTable extends Migration
             $table->string('schedule_id')->nullable();
             $table->string('percent_complete')->nullable();
             $table->integer('user_id')->unsigned();
+            $able->boolean('visible');
             $table->timestamps();
         });
     }

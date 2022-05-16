@@ -92,6 +92,8 @@ Route::get('task/{id}/pic', 'TaskPicController@show');
 Route::post('task/cover/{id}', 'TaskController@uploadcover');
 Route::post('uploadfp/{id}', 'TaskPicController@storefp');
 Route::post('task', 'TaskController@store');
+Route::post('task/hide/{id}', 'TaskController@hideTask');
+Route::post('task/show/{id}', 'TaskController@showTask');
 Route::get('task', 'TaskController@index');
 Route::get('tasknotdone', 'TaskController@indexNotDone');
 Route::get('task/{id}', 'TaskController@show');

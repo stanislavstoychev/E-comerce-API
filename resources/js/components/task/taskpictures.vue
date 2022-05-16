@@ -7,6 +7,8 @@
         <br>
         <h5 class="card-title">{{task.subcontractor.abbreviation}}  {{task.structure.name}}</h5>
 				    <p class="card-text">{{task.substructure.name}} - {{task.part.name}} - {{task.percent_complete}}%</p>
+                    <p class="card-text" v-if="task.description">Description: {{task.description}}</p>
+                    
 				    <p class="card-text">P.Start: {{task.planned_start}}; P.Finish: {{task.planned_finish}}</p>
 				    <p class="card-text">A.Start: {{task.actual_start}}; A.Finish: {{task.actual_finish}}</p>
         <div class="row">

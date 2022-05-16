@@ -16,7 +16,7 @@
                         </div>
 
                         <div class="col-md-6">
-                            <!-- //not working on web server -->
+                            <!-- //not working on server -->
                             <!-- <label for="exampleFormControlSelect1">Project</label>
                             <select class="form-control custom-select" id="exampleFormControlSelect1"
                                 v-model="project_id" >
@@ -39,6 +39,7 @@
 				  <div class="card-body">
 				    <h5 class="card-title">{{task.subcontractor.abbreviation}}  {{task.structure.name}}</h5>
 				    <p class="card-text">{{task.substructure.name}} - {{task.part.name}} - {{task.percent_complete}}%</p>
+                    <p class="card-text" v-if="task.description">Description: {{task.description}}</p>
 				    <p class="card-text">P.Finish: {{task.planned_finish}}</p>
 				    <p class="card-text">A.Finish: {{task.actual_finish}}</p>
 				  </div>
@@ -62,7 +63,9 @@
                                             class="btn btn-sm btn-success">
                                             <i class="far fa-edit"></i>
                                         </router-link>
-                    <button type="button" name="edit" class="btn btn-primary btn-sm text-white" @click="fetchData(task.id)">Upload pic</button>
+                    <button type="button"  class="btn btn-primary btn-sm text-white" @click="fetchData(task.id)">Upload pic</button>
+                    <button v-if="task.visible" type="button" class="btn btn-danger btn-sm text-white" @click="showTask(task.id)"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
+                    <button v-if="!task.visible" type="button" class="btn btn-danger btn-sm text-white" @click="hideTask(task.id)"><i class="fa fa-eye" aria-hidden="true"></i></button>
 				  </div>
 				</div>
                 <!-- vue pagination https://youtu.be/cuirNvBx8U8 -->
@@ -224,8 +227,24 @@ export default {
                     Notification.success()
                 })
                 .catch(error => this.errors = error.response.data.errors)
-        },    
+        },
+        hideTask(id) {
+            axios.post('api/task/hide/' + id)
+            .then(()=> {
+                this.tasks.forEach(task => {
+                    if(task.id == id) {task.visible = 0}
+                })
+            })
+                },
 
+        showTask(id) {
+            axios.post('api/task/show/' + id)
+                .then(()=> {
+                this.tasks.forEach(task => {
+                    if(task.id == id) {task.visible = 1}
+                })
+            })
+        },
 
         
 

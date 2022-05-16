@@ -33,11 +33,18 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function hideTask($id)
     {
-
+        $task = Task::findOrFail($id);
+        $task->visible = 0;
+        $task->update();
     }
-
+    public function showTask($id)
+    {
+        $task = Task::findOrFail($id);
+        $task->visible = 1;
+        $task->update();
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -53,6 +60,7 @@ class TaskController extends Controller
             'structure_id' => 'required',
             'part_id' => 'required',
             'substructure_id' => 'required',
+            'user_id' => 'required' 
            ]);
 
         $task = new Task;
@@ -70,6 +78,7 @@ class TaskController extends Controller
         $task->schedule_id = $request->schedule_id;
         $task->percent_complete = $request->percent_complete;
         $task->user_id = $request->user_id;
+        $task->visible = 1;
 
         //New
         if($request->photo) {
@@ -249,6 +258,7 @@ class TaskController extends Controller
             'structure_id' => 'required',
             'part_id' => 'required',
             'substructure_id' => 'required',
+            'user_id' => 'required',
            ]);
         $task = Task::find($id);
 
@@ -261,6 +271,7 @@ class TaskController extends Controller
         $data['actual_start'] = $request->actual_start;
         $data['actual_finish'] = $request->actual_finish;
         $data['planned_start'] = $request->planned_start;
+        $data['planned_finish'] = $request->planned_finish;
         $data['priority'] = $request->priority;
         $data['schedule_id'] = $request->schedule_id;
         $data['percent_complete'] = $request->percent_complete;
