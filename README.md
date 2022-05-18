@@ -12,3 +12,5 @@ This part keeps record for the lates darwing, history of the drawing, revisions,
 Tables used: drawing(project_id, part_id...), project, part, 
 drawingdet(drawing_id, version, revision...), drawingfile(drawingdet_id...), 
 drawingtransmittal  and drawingdet (many to many wiht pivot tabel drawingdet_drawingtransmittal)
+
+Task module is in process of development
