@@ -14,4 +14,4 @@ drawingdet(drawing_id, version, revision...), drawingfile(drawingdet_id...),
 drawingtransmittal  and drawingdet (many to many wiht pivot tabel drawingdet_drawingtransmittal)
 
 Task feature
-task,task-pic
+tables task,task-pic
