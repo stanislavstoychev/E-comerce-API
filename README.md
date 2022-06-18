@@ -12,6 +12,6 @@ Drawings and Transmittal form component.
 This part keeps record for the lates darwing, history of the drawing, revisions, version, transmittal history.
 Tables used: drawing (project_id, part_id...), project, part, 
 Drawingdet (drawing_id, version, revision...), drawingfile (drawingdet_id...), 
-drawingtransmittal  and drawingdet (many to many wiht pivot tabel drawingdet_drawingtransmittal)
+drawingtransmittal  and drawingdet (many to many wiht pivot tabel drawingdet_drawingtransmittal
 
 Task component is used for report on the progress of the task, with information % complete, planned start and finish, actual plan and finish, with ability to upload picturesa and have a gallery of pictures for the task. Used tables task, task-pic(one to many).
