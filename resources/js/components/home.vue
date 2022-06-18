@@ -170,58 +170,10 @@ export default {
         }
     },
     mounted() {
-        this.todaySale();
-        this.todayIncome();
-        this.todayDue();
-        this.todayExpense();
-        this.stockOut();
+
     },
     methods: {
-        todaySale() {
-            axios.get('/api/today/sale')
-                .then(({
-                    data
-                }) => {
-                    this.todaysale = data
-                })
-                .catch()
-        },
-        todayIncome() {
-            axios.get('/api/today/income')
-                .then(({
-                    data
-                }) => {
-                    this.income = data
-                })
-                .catch()
-        },
-        todayDue() {
-            axios.get('/api/today/due')
-                .then(({
-                    data
-                }) => {
-                    this.due = data
-                })
-                .catch()
-        },
-        todayExpense() {
-            axios.get('/api/today/expense')
-                .then(({
-                    data
-                }) => {
-                    this.expense = data
-                })
-                .catch()
-        },
-        stockOut() {
-            axios.get('/api/stockout')
-                .then(({
-                    data
-                }) => {
-                    this.products = data
-                })
-                .catch()
-        },
+
     },
 };
 </script>
