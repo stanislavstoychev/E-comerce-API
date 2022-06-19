@@ -88,7 +88,7 @@ export default {
     computed: {
         filterSearch() {
             return this.rfis.filter(rfi => {
-                return rfi.structure.match(this.searchTerm)
+                return rfi.structure.toUpperCase().includes(this.searchTerm.toUpperCase())
             })
         }
     },

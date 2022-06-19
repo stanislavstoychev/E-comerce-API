@@ -97,7 +97,7 @@ export default {
     computed: {
         filterSearch() {
             return this.tasks.filter(task => {
-                return task.structure.name.match(this.searchTerm)
+                return task.structure.name.toUpperCase().includes(this.searchTerm.toUpperCase())
             })
         }
     },

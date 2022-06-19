@@ -168,7 +168,7 @@ export default {
         filterSearch() {
             return this.tasks.filter(task => {
                 // return task.structure.name.match(this.searchTerm) && task.project_id === this.project_id
-                return task.structure.name.toUpperCase().match(this.searchTerm.toUpperCase())
+                return task.structure.name.toUpperCase().includes(this.searchTerm.toUpperCase())
 
             })
         }

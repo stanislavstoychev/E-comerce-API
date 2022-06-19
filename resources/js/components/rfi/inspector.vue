@@ -30,7 +30,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="rfi in rfis" :key="rfi.id">
+                                <tr v-for="rfi in filterSearch" :key="rfi.id">
                                     <td>{{rfi.project.abreviation}}</td>
                                     <td>{{rfi.structure.name}}</td>
                                     <td>{{rfi.substructure.name}}</td>
@@ -108,7 +108,7 @@ export default {
     computed: {
         filterSearch() {
             return this.rfis.filter(rfi => {
-                return rfi.structure.match(this.searchTerm)
+                return rfi.structure.toUpperCase().includes(this.searchTerm.toUpperCase())
             })
         }
     },

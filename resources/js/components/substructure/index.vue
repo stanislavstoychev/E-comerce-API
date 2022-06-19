@@ -2,7 +2,7 @@
     <div>
 
         <br>
-        <input type="text" placeholder="Search ..." class="form-control" style="width: 300px;" v-model="searchTerm">
+        <input type="text" placeholder="Search by structure name..." class="form-control" style="width: 300px;" v-model="searchTerm">
         <br>
         <div class="row">
             <div class="col-lg-12 mb-4">
@@ -24,7 +24,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="substructure in substructures" :key="substructure.id">
+                                <tr v-for="substructure in filterSearch" :key="substructure.id">
 
 
                                     <td>{{substructure.id}}</td>
@@ -72,7 +72,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="structure in structures" :key="structure.id">
+                                <tr v-for="structure in filterSearch1" :key="structure.id">
 
 
                                     <td>{{structure.id}}</td>
@@ -133,7 +133,19 @@ export default {
 
         }
     },
-    computed: {},
+    computed: {
+        filterSearch() {
+            return this.substructures.filter(substructure => {
+                return substructure.structure.name.toUpperCase().includes(this.searchTerm.toUpperCase())
+            })
+        },
+        filterSearch1() {
+            return this.structures.filter(structure => {
+                return structure.name.toUpperCase().includes(this.searchTerm.toUpperCase())
+            })
+        }
+    },
+
 
     methods: {
         AllSubstructures() {
