@@ -31,6 +31,8 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                
+                                <div v-if="!rfis.length">Loading...</div>
                                 <tr v-for="rfi in filterSearch" :key="rfi.id">
                                     <td>{{rfi.project}}</td>
                                     <td>{{rfi.structure}}</td>

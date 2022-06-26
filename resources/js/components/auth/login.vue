@@ -106,13 +106,11 @@ export default {
         })
         .catch((err) => {
           this.errors = err.response.data;
-        })
-        .catch(
           Toast.fire({
             icon: "warning",
             title: "Invalid email or password",
           })
-        );
+        });
     },
   },
 };
